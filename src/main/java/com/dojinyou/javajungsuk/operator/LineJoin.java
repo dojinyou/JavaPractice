@@ -4,6 +4,7 @@ import java.util.List;
 
 public class LineJoin {
     private Long id;
+
     // ctrl + shift + j 를 통해서 문자열을 합칠 수 있다.
     public String joinString() {
         String profile = "안녕하세요 IntelliJ 강의에 오신 것을 환영합니다. ";
@@ -11,11 +12,10 @@ public class LineJoin {
     }
 
     public String createQuery(String name) {
-        String query = "SELECT * "+
-                "FROM member " +
-                "WHERE member.name = " +  name;
+        String query = "SELECT * " + "FROM member " + "WHERE member.name = " + name;
         return query;
     }
+
     private void extractMethod(List<Book> books) {
         for (Book book : books) {
             loopAuthors(book);
@@ -39,6 +39,7 @@ public class LineJoin {
     public static class Book {
         private String title;
         private long price;
+        private long discountRate = 1;
         private List<String> authors;
 
         public String getTitle() {
@@ -60,6 +61,7 @@ public class LineJoin {
         public List<String> getAuthors() {
             return authors;
         }
+
         public void setAuthors(List<String> authors) {
             this.authors = authors;
         }
