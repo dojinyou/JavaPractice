@@ -8,12 +8,12 @@ public class LineJoin {
     // ctrl + shift + j 를 통해서 문자열을 합칠 수 있다.
     public String joinString() {
         String profile = "안녕하세요 IntelliJ 강의에 오신 것을 환영합니다. ";
-        return profile;
+        String name = "what_do_you_do";
+        return profile + name;
     }
 
     public String createQuery(String name) {
-        String query = "SELECT * " + "FROM member " + "WHERE member.name = " + name;
-        return query;
+        return "SELECT * " + "FROM member " + "WHERE member.name = " + name;
     }
 
     private void extractMethod(List<Book> books) {
@@ -30,7 +30,9 @@ public class LineJoin {
 
     private void print(String author) {
         String format = "담당자가 맞습니다.";
-        if ("dojinyou".equals(author)) {
+        String username = "dojinyou";
+        username = "youdojin";
+        if (username.equals(author)) {
             System.out.printf(format);
         }
     }

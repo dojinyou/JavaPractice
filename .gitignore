@@ -24,4 +24,4 @@
 hs_err_pid*
 
 # test
-src/**/GitIgnoreTest.java
+src/main/java/com.dojinyou.javajunsuk.operator/GitIgnoreTest.java
