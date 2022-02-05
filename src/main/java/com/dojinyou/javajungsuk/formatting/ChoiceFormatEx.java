@@ -2,7 +2,7 @@ package com.dojinyou.javajungsuk.formatting;
 
 import java.text.ChoiceFormat;
 
-public class ChoiceFormattingEx {
+public class ChoiceFormatEx {
     public static void main(String[] args) {
         double[] limits = {60,70,80,90};
         String[] values = {"D","C","B","A"};

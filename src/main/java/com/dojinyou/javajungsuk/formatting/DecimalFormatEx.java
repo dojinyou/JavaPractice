@@ -2,7 +2,7 @@ package com.dojinyou.javajungsuk.formatting;
 
 import java.text.DecimalFormat;
 
-public class DecimalFormatting {
+public class DecimalFormatEx {
     /*
     * 0 : 10진수(값이 없을 때는 0으로 채움)
     * # : 10진수

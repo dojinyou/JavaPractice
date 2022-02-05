@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-public class DateFormattingParseEx  {
+public class DateFormatParseEx  {
     public static void main(String[] args) {
         String inputPattern = "yyyy-MM-dd";
         String outputPattern = "yyyy년 MM월 dd일";

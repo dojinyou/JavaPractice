@@ -2,7 +2,7 @@ package com.dojinyou.javajungsuk.formatting;
 
 import java.text.ChoiceFormat;
 
-public class ChoiceForamttingEx2 {
+public class ChoiceForamtEx2 {
     public static void main(String[] args) {
         String pattern1 = "60#D|70#C|80#B|90#A";
         String pattern2 = "60<D|70<C|80<B|90<A";

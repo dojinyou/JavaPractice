@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DateFormattingEx {
+public class DateFormatEx {
     public static void main(String[] args) {
         Date today = new Date();
         Calendar cal = Calendar.getInstance();
