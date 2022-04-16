@@ -1,6 +1,17 @@
 package com.dojinyou.thejavatestpractice;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ParameterContext;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.aggregator.AggregateWith;
+import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
+import org.junit.jupiter.params.aggregator.ArgumentsAggregationException;
+import org.junit.jupiter.params.aggregator.ArgumentsAggregator;
+import org.junit.jupiter.params.converter.ArgumentConversionException;
+import org.junit.jupiter.params.converter.ConvertWith;
+import org.junit.jupiter.params.converter.SimpleArgumentConverter;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.Duration;
 
@@ -60,8 +71,55 @@ class StudyTest {
         assertEquals("number of maxnimum member is must bigger than 0", exception.getMessage());
     }
 
-    ;
+    @RepeatedTest(value = 10, name = "{displayName}, {currentRepetition}/{totalRepetitions}")
+    @DisplayName("반복 테스트")
+    void repeatedTest() {
+    }
 
+    @ParameterizedTest(name = "{index}-{displayName}, value={0}")
+    @ValueSource(strings = {"문자열", "여러", "개를", "받는", "법"})
+    @DisplayName("파라미터 반복 테스트 테스트")
+    void parameterizedTest(String value) {
+        System.out.println(value);
+    }
+
+    @ParameterizedTest(name = "{index}-{displayName}, value={0}")
+    @ValueSource(ints = {1,5,10})
+    @DisplayName("파라미터 반복 테스트 테스트 with 타입 변환기")
+    void parameterizedTestWithConverter(@ConvertWith(StudyConverter.class) Study study) {
+        System.out.println(study.getNumOfMaximumMembers());
+    }
+
+    static class StudyConverter extends SimpleArgumentConverter {
+        @Override
+        protected Object convert(Object source, Class<?> targetType) throws ArgumentConversionException {
+            assertEquals(Study.class, targetType, "Study Type으로만 변환시킬 수 있습니다.");
+            return new Study(Integer.parseInt(source.toString()));
+        }
+    }
+
+    @ParameterizedTest(name = "{index}-{displayName}, limit={0}, name={1}")
+    @CsvSource({"1,'도진01'","5,'도진02'","10,'도진03'"})
+    @DisplayName("반복테스트 with CsvSource")
+    void parameterizedTestWithCSVSource(int numOfMaxMem, String name) {
+        System.out.println(new Study(numOfMaxMem,name));
+    }
+
+    @ParameterizedTest(name = "{index}-{displayName}, limit={0}, name={1}")
+    @CsvSource({"1,'도진01'","5,'도진02'","10,'도진03'"})
+    @DisplayName("반복테스트 with Aggregator")
+    void parameterizedTestWithCSVSourceAndAggregator(@AggregateWith(StudyAggregator.class) Study study) {
+        System.out.println(study);
+    }
+
+    static class StudyAggregator implements ArgumentsAggregator {
+        @Override
+        public Object aggregateArguments(ArgumentsAccessor accessor, ParameterContext context) throws ArgumentsAggregationException {
+            int maxMember = accessor.getInteger(0);
+            String name = accessor.getString(1);
+            return new Study(maxMember,name);
+        }
+    }
 
     @Test
     @DisplayName("Duration 테스트")
@@ -92,7 +150,7 @@ class StudyTest {
 //        assertTrue(study.getNumOfMaximumMembers() > 10, ()->"최대인원은 10보다 커야합니다");
         // assertThat을 이용한 테스트 코드
         // 사용하기 위해서 assertJ에서 import를 해주어야 함.
-        assertThat(study.getNumOfMaximumMembers()).as(()->"최대인원은 0보다 커야합니다.")
+        assertThat(study.getNumOfMaximumMembers()).as(() -> "최대인원은 0보다 커야합니다.")
                                                   .isGreaterThan(0);
 
     }
