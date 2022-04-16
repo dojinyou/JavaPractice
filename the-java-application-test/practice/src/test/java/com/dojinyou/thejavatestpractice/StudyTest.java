@@ -18,6 +18,12 @@ import java.time.Duration;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+
+// 테스트 클래스는 각 메소드마다 새로운 테스트 클래스 인스턴스를 생성한다.
+// 왜냐하면 각 테스트간의 의존성을 제거하기 위해서이다.
+// 하나의 인스턴스를 가지고 여러 테스트 케이스를 검증하는 방법은
+// 테스트 인스턴스의 생명주기를 클래스 단위로 만들어주는 것!
+// @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class StudyTest {
 
     // 모든 테스트가 실행 전 딱 1번 호출됨.
